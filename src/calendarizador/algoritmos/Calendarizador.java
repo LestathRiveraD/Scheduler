@@ -1,7 +1,7 @@
 package calendarizador;
 
+import modelo.PCB;
 import java.util.List;
-import 
 
 public interface Calendarizador {
     String getNombre();
