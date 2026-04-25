@@ -49,10 +49,6 @@ public class PCB {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
     public int getPrioridad() {
         return prioridad;
     }
@@ -123,6 +119,32 @@ public class PCB {
 
     public void setContextoCPU(Map<String, Integer> contextoCPU) {
         this.contextoCPU = contextoCPU;
+    }
+
+    // Transiciones de estado
+    public void iniciar() {
+        if (estado == Estado.NUEVO)
+            estado = Estado.LISTO;
+    }
+    
+    public void despachar() {
+        if (estado == Estado.LISTO)
+            estado = Estado.EJECUTANDO;
+    }
+
+    public void bloquear() {
+        if (estado == Estado.EJECUTANDO)
+            estado = Estado.BLOQUEADO;
+    }
+
+    public void desbloquear() {
+        if (estado == Estado.BLOQUEADO)
+            estado = Estado.EJECUTANDO;
+    }
+
+    public void terminar() {
+        if (estado == Estado.EJECUTANDO)
+            estado = Estado.TERMINADO;
     }
 
     public static void main(String[] args) {
