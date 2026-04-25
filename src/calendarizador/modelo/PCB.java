@@ -1,3 +1,5 @@
+package modelo;
+
 import java.util.*;
 
 public class PCB implements Comparable<PCB> {
