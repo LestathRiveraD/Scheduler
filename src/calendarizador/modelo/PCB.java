@@ -119,12 +119,12 @@ public class PCB implements Comparable<PCB> {
     }
 
     // Transiciones de estado
-    public void iniciar() {
+    public void listo() {
         if (estado == Estado.NUEVO)
             estado = Estado.LISTO;
     }
     
-    public void despachar() {
+    public void ejecutando() {
         if (estado == Estado.LISTO)
             estado = Estado.EJECUTANDO;
     }
