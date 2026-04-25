@@ -151,6 +151,26 @@ public class PCB implements Comparable<PCB> {
         return Integer.compare(this.getPrioridad(), other.getPrioridad());
     }
     
+    // Metodo toString
+    @Override
+    public String toString() {
+        return "PCB{" +
+            "pid=" + pid +
+            ", nombre='" + nombre + '\'' +
+            ", estado=" + estado +
+            ", prioridad=" + prioridad +
+            ", tiempoLlegada=" + tiempoLlegada +
+            ", tiempoRafaga=" + tiempoRafaga +
+            ", tiempoRestante=" + tiempoRestante +
+            ", tiempoEspera=" + tiempoEspera +
+            ", tiempoRetorno=" + tiempoRetorno +
+            ", tiempoInicio=" + tiempoInicio +
+            ", tiempoFin=" + tiempoFin +
+            ", contadorAging=" + contadorAging +
+            ", contextoCPU=" + contextoCPU +
+            '}';
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello world");
     }
