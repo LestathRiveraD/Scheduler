@@ -1,11 +1,6 @@
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
-import java.util.Map;
-import java.util.HashMap;
-
-public class PCB {
-
+public class PCB implements Comparable<PCB> {
     private final int pid;
     private final String nombre;
     private Estado estado;
@@ -147,6 +142,15 @@ public class PCB {
             estado = Estado.TERMINADO;
     }
 
+    // Comparaciones para cola de prioridad
+    @Override
+    public int compareTo(PCB other) {
+        // Checar que no sea null
+        if (other == null)
+            throw new NullPointerException("No se puede comparar con null");
+        return Integer.compare(this.getPrioridad(), other.getPrioridad());
+    }
+    
     public static void main(String[] args) {
         System.out.println("Hello world");
     }
