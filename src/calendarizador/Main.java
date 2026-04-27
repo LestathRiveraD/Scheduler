@@ -82,6 +82,11 @@ public class Main
         {
             s.add(p.getPid());
             l.add(p.getPid());
+            if (p.getTiempoRafaga() <= 0)
+            {
+                System.out.println("Error: La ráfaga debe ser mayor que 0");
+                return;
+            }
         }
         if (s.size() != l.size() || procesos.size() == 0)
         {
