@@ -1,4 +1,4 @@
-package calendarizador;
+package algoritmos;
 
 import modelo.PCB;
 import java.util.List;

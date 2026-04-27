@@ -1,20 +1,33 @@
 package simulacion;
+
 import java.util.*;
-import Calendarizador;
-import GestorColas;
+import calendarizador.Calendarizador;
+import simulacion.GestorColas;
 
 public class Simulador
 {
     private Calendarizador calendarizador;
-    private GestorColas gestorColas
-    private current_tick;
-    public Simulador(Calendarizador calendarizador, GestorColas gestorColas)
+    private GestorColas gestorColas;
+    private int current_tick;
+    private boolean paso_a_paso = false;
+    private Scanner scanner = new Scanner(System.in);
+    public Simulador(Calendarizador calendarizador, GestorColas gestorColas, int paso_a_paso)
     {
         this.calendarizador = calendarizador;
         this.gestorColas = gestorColas;
         current_tick = 0;
     }
 
+    public boolean getIs_Paso_a_Paso()
+    {
+        return this.paso_a_paso;
+    }
+
+    public void setIs_Paso_a_Paso(boolean paso_a_paso)
+    {
+        this.paso_a_paso = paso_a_paso;
+    }
+    
     public void tick()
     {
         PCB procesoActual = gestorColas.getProcesoActual();
@@ -109,7 +122,13 @@ public class Simulador
         // 9. Estado
         System.out.println(gestorColas.toString());
 
+        if (getIs_Paso_a_Paso())
+        {
+            System.out.println("Pulse ENTER para ir al siguiente tick.");
+            scanner.nextLine();
+        }
         current_tick++; // ✔️
+
     }
 
 }
