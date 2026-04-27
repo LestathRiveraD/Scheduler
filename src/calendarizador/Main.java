@@ -3,6 +3,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import modelo.PCB;
 import simulacion.*;
+import algoritmos.*;
 
 public class Main
 {
@@ -11,25 +12,22 @@ public class Main
         List<String> lineas = new ArrayList<>();
         List<PCB> procesos = new ArrayList<>();
 
-        if (args.length == 1) // Leer txt con los datos
+        if (args.length == 1) // Leer txt
         {
-            // Validar formato: nombre_archivo.txt
             if (!args[0].matches("[a-zA-Z0-9_\\-]+\\.txt")) {
                 System.out.println("Error: El archivo debe tener formato nombre_archivo.txt");
                 return;
             }
 
-            // Leer lineas del archivo proporcionado por el usuario
             try {
                 lineas = Files.readAllLines(Paths.get(args[0]));
-            } 
+            }
             catch (Exception e) {
                 System.out.println("Lectura de " + args[0] + " falló");
                 return;
             }
 
-            // Convertir las lineas del archivo de texto a objetos PCB
-            for (int i = 1; i < lineas.size(); i++) 
+            for (int i = 1; i < lineas.size(); i++)
             {
                 String[] cur = lineas.get(i).split(",");
 
@@ -39,16 +37,16 @@ public class Main
                 }
 
                 PCB p = new PCB(
-                    Integer.parseInt(cur[0].trim()),
-                    cur[1].trim(),
-                    Integer.parseInt(cur[2].trim()),
-                    Integer.parseInt(cur[3].trim())
+                        Integer.parseInt(cur[0].trim()),
+                        cur[1].trim(),
+                        Integer.parseInt(cur[2].trim()),
+                        Integer.parseInt(cur[3].trim())
                 );
 
                 procesos.add(p);
             }
         }
-        else if (args.length == 0) // Leer datos por consola
+        else if (args.length == 0) // Consola
         {
             Scanner sc = new Scanner(System.in);
 
@@ -77,36 +75,77 @@ public class Main
                 PCB p = new PCB(pid, nombre, llegada, rafaga);
                 procesos.add(p);
             }
-
-            sc.close();
         }
         else
         {
-            System.out.println("Uso: java Main [nombre_archivo.txt]  /  java Main");
+            System.out.println("Uso: java Main [archivo.txt] o java Main");
             return;
         }
 
         Set<Integer> s = new HashSet<>();
-        List<Integer> l = new ArrayList<>();
-
         for (PCB p : procesos)
         {
-            s.add(p.getPid());
-            l.add(p.getPid());
+            if (p.getTiempoRafaga() <= 0) {
+                System.out.println("Error: ráfaga debe ser > 0");
+                return;
+            }
 
-            if (p.getTiempoRafaga() <= 0)
-            {
-                System.out.println("Error: La ráfaga debe ser mayor que 0");
+            if (!s.add(p.getPid())) {
+                System.out.println("Error: PID duplicado");
                 return;
             }
         }
 
-        if (s.size() != l.size() || procesos.size() == 0)
-        {
-            System.out.println("Error: PIDs duplicadas o lista vacía.");
+        if (procesos.isEmpty()) {
+            System.out.println("Error: no hay procesos");
             return;
         }
+
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\nSeleccione algoritmo:");
+        System.out.println("1. FCFS");
+        System.out.println("2. SJF");
+        int opcion = sc.nextInt();
+
+        Calendarizador algoritmo;
+
+        switch (opcion) {
+            case 1:
+                algoritmo = new CalendarizadorFCFS();
+                break;
+            case 2:
+                algoritmo = new CalendarizadorSJF();
+                break;
+            default:
+                System.out.println("Opción inválida");
+                return;
+        }
+
+        // Crear gestor de colas
+        GestorColas gestor = new GestorColas();
+
+        // Cargar procesos a cola de nuevos
+        for (PCB p : procesos) {
+            gestor.getNuevos().add(p);
+        }
+
+        // Crear simulador
+        Simulador simulador = new Simulador(algoritmo, gestor, 0);
+
+        // Preguntar modo paso a paso
+        System.out.print("¿Modo paso a paso? (1 = sí, 0 = no): ");
+        int paso = sc.nextInt();
+        simulador.setIs_Paso_a_Paso(paso == 1);
+
+        while (gestor.getTerminados().size() < procesos.size()) {
+            simulador.tick();
+        }
+
+        // Mostrar Gantt
+        System.out.println("\nSimulación terminada.");
+
+        sc.close();
     }
-
-
 }
