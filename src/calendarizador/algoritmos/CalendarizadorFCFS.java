@@ -1,8 +1,8 @@
 package algoritmos;
 
 import java.util.List;
-import algoritmo.*;
-import modelo.Calendarizador;
+import algoritmos.*;
+import modelo.*;
 import simulacion.*; 
 
 public class CalendarizadorFCFS implements Calendarizador {

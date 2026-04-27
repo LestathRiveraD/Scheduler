@@ -1,5 +1,6 @@
 package simulacion;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import modelo.PCB;
@@ -57,9 +58,9 @@ public class GestorColas
     @Override
     public String toString() {
     return      "  Estado      | PID\n" + 
-                "  Nuevos      | " + Nuevos + "\n" +
-                "  Listos      | " + Listos + "\n" +
-                "  Bloqueados  | " + Bloqueados + "\n" +
-                "  Terminados  | " + Terminados + "\n";
+                "  Nuevos      | " + nuevos + "\n" +
+                "  Listos      | " + listos + "\n" +
+                "  Bloqueados  | " + bloqueados + "\n" +
+                "  Terminados  | " + terminados + "\n";
     }
 } 

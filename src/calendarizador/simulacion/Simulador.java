@@ -2,11 +2,12 @@ package simulacion;
 
 import java.util.*;
 import algoritmos.*;
-import simulacion.*;
+import simulacion.GanttRenderer;
 import modelo.*;
 
 public class Simulador
 {
+    private GanttRenderer renderer;
     private Calendarizador calendarizador;
     private GestorColas gestorColas;
     private int current_tick;
@@ -68,7 +69,7 @@ public class Simulador
 
         // 3. Expulsión
         if (procesoEnCPU != null && calendarizador.esApropiativo()) {
-            if (calendarizador.debeExpulsar(procesoEnCPU, listos, current_tick)) {
+            if (calendarizador.debeExpulsar(procesoEnCPU, (List)listos, current_tick)) {
                 procesoEnCPU.listo();
                 listos.add(procesoEnCPU);
                 gestorColas.setProcesoActual(null);
@@ -78,7 +79,7 @@ public class Simulador
 
         // 4. Selección
         if (procesoEnCPU == null && !listos.isEmpty()) {
-            procesoEnCPU = calendarizador.seleccionarProceso(listos, current_tick);
+            procesoEnCPU = calendarizador.seleccionarProceso((List)listos, current_tick);
             gestorColas.setProcesoActual(procesoEnCPU);
             listos.remove(procesoEnCPU);
             procesoEnCPU.ejecutando();
@@ -103,14 +104,14 @@ public class Simulador
             gestorColas.setProcesoActual(null);
             // Se guarda la referencia para el Gantt antes de limpiar
             String nombreFinalizado = procesoEnCPU.getNombre();
-            ganttRenderer.registrarTick(nombreFinalizado);
+            renderer.registrarTick(nombreFinalizado);
             procesoEnCPU = null;
         } else {
             // Registro en Gantt
             if (procesoEnCPU != null) {
-                ganttRenderer.registrarTick(procesoEnCPU.getNombre());
+                renderer.registrarTick(procesoEnCPU.getNombre());
             } else {
-                ganttRenderer.registrarTick(null); // CPU ociosa
+                renderer.registrarTick(null); // CPU ociosa
             }
         }
         // 7. Tiempo de espera

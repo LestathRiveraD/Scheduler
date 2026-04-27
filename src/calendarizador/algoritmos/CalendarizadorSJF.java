@@ -2,7 +2,7 @@ package algoritmos;
 
 import java.util.Iterator;
 import java.util.List;
-import calendarizador.modelo.PCB;
+import modelo.PCB;
 
 public class CalendarizadorSJF implements Calendarizador {
 
