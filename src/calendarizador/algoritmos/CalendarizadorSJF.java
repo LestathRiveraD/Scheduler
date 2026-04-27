@@ -1,1 +1,1 @@
-package calendarizador;
+package calendarizador.algoritmos;
