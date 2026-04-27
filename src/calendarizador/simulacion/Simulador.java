@@ -1,8 +1,9 @@
 package simulacion;
 
 import java.util.*;
-import calendarizador.Calendarizador;
-import simulacion.GestorColas;
+import algoritmos.*;
+import simulacion.*;
+import modelo.*;
 
 public class Simulador
 {

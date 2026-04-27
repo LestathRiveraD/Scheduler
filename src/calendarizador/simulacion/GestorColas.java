@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import modelo.PCB;
 
-public class GestorColas(String[] args)
+public class GestorColas
 {
     private Queue<PCB> nuevos = new LinkedList<PCB>();
     private Queue<PCB> listos = new LinkedList<PCB>();
