@@ -73,9 +73,7 @@ public class Main
             sc.close();
         }
         else
-        {
             System.out.println("Uso: Java Main [nombre_archivo.txt] / Java Main");
-        }
 
         Set<Integer> s = new HashSet<>();
         List<Integer> l = new ArrayList<>(); 
@@ -85,10 +83,7 @@ public class Main
             s.add(p.getPid());
             l.add(p.getPid());
         }
-
-            System.out.println(s.size());
-            System.out.println(l.size());
-        if (s.size() != l.size())
+        if (s.size() != l.size() || procesos.size() == 0)
         {
             System.out.println("Error: PIDS duplicadas.");
             return;
