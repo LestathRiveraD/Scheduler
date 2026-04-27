@@ -1,6 +1,6 @@
-package calendarizador;
+package calendarizador.algoritmos;
 
-import modelo.PCB;
+import calendarizador.modelo.PCB;
 import java.util.List;
 
 public interface Calendarizador {

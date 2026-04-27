@@ -1,16 +1,18 @@
-package simulacion;
+package calendarizador.simulacion;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
-import modelo.PCB;
+import calendarizador.modelo.PCB;
+import java.util.LinkedList;
 
-public class GestorColas(String[] args)
+public class GestorColas
 {
     private Queue<PCB> nuevos = new LinkedList<PCB>();
     private Queue<PCB> listos = new LinkedList<PCB>();
     private Queue<PCB> bloqueados = new LinkedList<PCB>();
     private Queue<PCB> terminados = new LinkedList<PCB>();
     private PCB procesoActual = null;
+
 
     // ===== GETTERS =====
     public Queue<PCB> getNuevos() {
@@ -57,9 +59,9 @@ public class GestorColas(String[] args)
     @Override
     public String toString() {
     return      "  Estado      | PID\n" + 
-                "  Nuevos      | " + Nuevos + "\n" +
-                "  Listos      | " + Listos + "\n" +
-                "  Bloqueados  | " + Bloqueados + "\n" +
-                "  Terminados  | " + Terminados + "\n";
+                "  Nuevos      | " + nuevos + "\n" +
+                "  Listos      | " + listos + "\n" +
+                "  Bloqueados  | " + bloqueados + "\n" +
+                "  Terminados  | " + terminados + "\n";
     }
 } 

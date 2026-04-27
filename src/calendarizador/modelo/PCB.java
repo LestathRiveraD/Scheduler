@@ -1,4 +1,4 @@
-package modelo;
+package calendarizador.modelo;
 
 import java.util.*;
 

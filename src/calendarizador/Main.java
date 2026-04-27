@@ -1,8 +1,10 @@
+package calendarizador;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import modelo.PCB;
-import simulacion.GanttRenderer;
+import calendarizador.modelo.PCB;
+import calendarizador.simulacion.GanttRenderer;
 
 public class Main
 {
