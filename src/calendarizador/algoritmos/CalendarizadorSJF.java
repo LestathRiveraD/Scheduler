@@ -1,4 +1,4 @@
-package calendarizador.algoritmos;
+package algoritmos;
 
 import java.util.Iterator;
 import java.util.List;
