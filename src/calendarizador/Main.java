@@ -12,6 +12,12 @@ public class Main
 
         if (args.length == 1) // Leer txt con los datos
         {
+            // Validar formato: nombre_archivo.txt
+            if (!args[0].matches("[a-zA-Z0-9_\\-]+\\.txt")) {
+                System.out.println("Error: El archivo debe tener formato nombre_archivo.txt");
+                return;
+            }
+
             // Leer lineas del archivo proporcionado por el usuario
             try {
                 lineas = Files.readAllLines(Paths.get(args[0]));
@@ -47,7 +53,7 @@ public class Main
 
             System.out.print("¿Cuántos procesos desea ingresar?: ");
             int n = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
+            sc.nextLine();
 
             for (int i = 0; i < n; i++)
             {
@@ -70,27 +76,33 @@ public class Main
                 PCB p = new PCB(pid, nombre, llegada, rafaga);
                 procesos.add(p);
             }
+
             sc.close();
         }
         else
-            System.out.println("Uso: Java Main [nombre_archivo.txt] / Java Main");
+        {
+            System.out.println("Uso: java Main [nombre_archivo.txt]  /  java Main");
+            return;
+        }
 
         Set<Integer> s = new HashSet<>();
-        List<Integer> l = new ArrayList<>(); 
+        List<Integer> l = new ArrayList<>();
 
         for (PCB p : procesos)
         {
             s.add(p.getPid());
             l.add(p.getPid());
+
             if (p.getTiempoRafaga() <= 0)
             {
                 System.out.println("Error: La ráfaga debe ser mayor que 0");
                 return;
             }
         }
+
         if (s.size() != l.size() || procesos.size() == 0)
         {
-            System.out.println("Error: PIDS duplicadas.");
+            System.out.println("Error: PIDs duplicadas o lista vacía.");
             return;
         }
     }
