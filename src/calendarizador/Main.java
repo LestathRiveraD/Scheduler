@@ -2,6 +2,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import modelo.PCB;
+import simulacion.GanttRenderer;
 
 public class Main
 {
@@ -56,5 +57,19 @@ public class Main
         {
 
         }
+        // BLOQUE DE PRUEBA (GANTT RENDERER)
+        System.out.println("\n--- Iniciando prueba del visualizador ---");
+        GanttRenderer renderer = new GanttRenderer();
+
+        // Simular el comportamiento del CPU tick por tick
+        renderer.registrarTick("P1");
+        renderer.registrarTick("P1");
+        renderer.registrarTick("P2");
+        renderer.registrarTick(null);
+        renderer.registrarTick("P3");
+        renderer.registrarTick("P3");
+
+        // Imprime resultado en consola
+        renderer.mostrarDiagrama();
     }
 }

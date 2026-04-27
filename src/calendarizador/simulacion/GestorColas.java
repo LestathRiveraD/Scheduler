@@ -19,7 +19,7 @@ public class GestorColas
     }
 
     public void setProcesoActual(PCB proceso) {
-        this.processoActual = proceso;
+        this.procesoActual = proceso;
     }
 
     @Override
