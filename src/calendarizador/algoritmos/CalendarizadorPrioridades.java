@@ -6,6 +6,9 @@ import modelo.PCB;
 
 public class CalendarizadorPrioridades implements Calendarizador {
 
+    public CalendarizadorPrioridades(int intervalo) {
+        this.intervalo = intervalo;
+    }
     private int intervalo;
 
     public int getIntervalo()
@@ -63,7 +66,7 @@ public class CalendarizadorPrioridades implements Calendarizador {
     @Override
     public boolean debeExpulsar(PCB enEjecucion, List<PCB> colaListos, int tiempoActual) {
         if (colaListos == null || colaListos.isEmpty()) {
-            return null;
+            return false;
         }
         PCB seleccionado = colaListos.get(0);
 

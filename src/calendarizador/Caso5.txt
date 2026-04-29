@@ -1,0 +1,8 @@
+pid,nombre,llegada,rafaga,prioridad,tiempoIO
+1,P1,0,14,5,0
+2,P2,1,12,1,0
+3,P3,2,10,1,0
+4,P4,3,8,1,0
+5,P5,4,6,2,0
+6,P6,6,4,1,0
+7,P7,8,2,3,0
