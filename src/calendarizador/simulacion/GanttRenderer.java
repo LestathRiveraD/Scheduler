@@ -12,10 +12,10 @@ public class GanttRenderer {
     }
 
     // Registra que proceso ocupo la CPU en un tick especifico
-    // Si no hay proceso, se puede pasar NULL
     public void registrarTick(String nombreProceso) {
         if (nombreProceso == null) {
-            historialEjecucion.add("--"); // Representacion de CPU ociosa
+            // Representacion de CPU ociosa
+            historialEjecucion.add("--");
         } else {
             historialEjecucion.add(nombreProceso);
         }

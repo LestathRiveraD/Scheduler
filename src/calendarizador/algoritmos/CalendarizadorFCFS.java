@@ -9,24 +9,21 @@ public class CalendarizadorFCFS implements Calendarizador {
 
     @Override
     public String getNombre() {
-        return "First Come First Served (FCFS)";
+        return "FCFS";
     }
 
-
-     // Selecciona el primer proceso en la lista de listos.
-     // Al usar una LinkedList en GestorColas, el índice 0 siempre representa al proceso que lleva más tiempo esperando.
+     // Selecciona el primer proceso en la lista de listos
     @Override
     public PCB seleccionarProceso(List<PCB> colaListos, int tiempoActual) {
         if (colaListos == null || colaListos.isEmpty()) {
             return null;
         }
-        // tomamos el primer elemento disponible.
+        // toma el primer elemento disponible.
         return colaListos.get(0);
     }
 
     @Override
     public boolean esApropiativo() {
-        // FCFS es un algoritmo no apropiativo
         return false;
     }
 

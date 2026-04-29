@@ -10,7 +10,7 @@ public class CalendarizadorSRTF implements Calendarizador {
         return "SRTF";
     }
 
-    // Selecciona el proceso con el menor tiempo restante en la cola de listos.
+    // Selecciona el proceso con el menor tiempo restante en la cola de listos
     @Override
     public PCB seleccionarProceso(List<PCB> colaListos, int tiempoActual) {
         if (colaListos == null || colaListos.isEmpty()) {
@@ -31,7 +31,6 @@ public class CalendarizadorSRTF implements Calendarizador {
                 }
             }
         }
-
         return seleccionado;
     }
 
@@ -50,7 +49,8 @@ public class CalendarizadorSRTF implements Calendarizador {
 
         for (PCB proceso : colaListos) {
             if (proceso.getTiempoRestante() < enEjecucion.getTiempoRestante()) {
-                return true; // Si se encuentra un proceso mas corto, se solicita expulsion
+                // Si se encuentra un proceso mas corto, se solicita expulsion
+                return true;
             }
         }
         return false;

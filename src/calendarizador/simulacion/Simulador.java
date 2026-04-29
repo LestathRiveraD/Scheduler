@@ -43,7 +43,7 @@ public class Simulador {
             }
         }
 
-        // 2. Desbloqueo (simplificado)
+        // 2. Desbloqueo
         it = bloqueados.iterator();
         while (it.hasNext()) {
             PCB p = it.next();
