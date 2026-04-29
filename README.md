@@ -1,56 +1,58 @@
-📅 Scheduler
+Simulador de Calendarización de Procesos - Java
 
-Un sistema simple de gestión de horarios y tareas desarrollado en Java.
-Este proyecto permite crear, organizar y administrar eventos o tareas con fechas y horas específicas, ideal como base para sistemas de agenda o planificación.
+Este proyecto consiste en un simulador de gestión de procesos que emula el comportamiento de un planificador de corto plazo en un Sistema Operativo. El sistema modela el ciclo de vida de los procesos, gestiona colas de estado y ejecuta diversos algoritmos de calendarización para reportar métricas de rendimiento y visualizaciones gráficas.
+Características Principales
 
-🚀 Características
-Crear tareas con fecha y hora
-Listar eventos programados
-Editar tareas existentes
-Eliminar tareas
-Estructura simple y fácil de extender
-Proyecto base para apps tipo agenda, recordatorios o planners
-🧠 Motivación
+Modelado Completo de PCB: Cada proceso se gestiona mediante un Process Control Block (PCB) que almacena atributos como PID, ráfaga de CPU, tiempos de llegada, prioridad y estado actual.
 
-Este proyecto fue creado como práctica de estructuras de datos, manejo de objetos y lógica de programación en Java, con enfoque en simulación de un sistema real de scheduling.
+Ciclo de Vida del Proceso: Soporta las transiciones entre estados: NUEVO, LISTO, EJECUTANDO, BLOQUEADO y TERMINADO.
 
-🛠️ Tecnologías
-Java (JDK 8+)
-CLI (consola)
-Estructuras de datos básicas (listas/arrays según implementación)
-📦 Instalación
+Visualización de Resultados: Genera un diagrama de Gantt en consola para observar la ocupación de la CPU tick a tick.
 
-Clona el repositorio:
+Reporte de Métricas: Calcula automáticamente el tiempo de espera promedio, tiempo de retorno promedio, uso total de CPU y número de cambios de contexto.
 
-git clone https://github.com/LestathRiveraD/Scheduler.git
-cd Scheduler
+Algoritmos Implementados
 
-Compila el proyecto:
+El simulador incluye los siguientes algoritmos de planificación:
 
-javac Main.java
+FCFS (First-Come, First-Served): Planificación no apropiativa basada en el orden de llegada.
 
-Ejecuta:
+SJF (Shortest Job First): Selección no apropiativa del proceso con la ráfaga más corta.
+
+SRTF (Shortest Remaining Time First): Versión apropiativa de SJF que interrumpe la ejecución si llega un proceso con menor tiempo restante.
+
+Round Robin (RR): Algoritmo apropiativo que utiliza un quantum de tiempo configurable para alternar procesos en la CPU.
+
+Prioridades con Aging: Selección basada en prioridad numérica con un mecanismo de envejecimiento para evitar la inanición de procesos de baja prioridad.
+
+Estructura del Proyecto
+
+El código está organizado en paquetes siguiendo principios de diseño orientado a objetos:
+
+calendarizador.modelo: Contiene la lógica del PCB, el enum Estado y la gestión de resultados.
+
+calendarizador.algoritmos: Define la interfaz Calendarizador y las implementaciones de cada política de planificación.
+
+calendarizador.simulacion: Motor central que ejecuta los "ticks" de reloj, gestiona las colas y renderiza el diagrama de Gantt.
+
+Requisitos de Ejecución
+
+Lenguaje: Java 11 o superior.
+
+Entorno: No requiere librerías externas adicionales.
+
+Uso
+
+El programa admite dos modos de entrada de datos:
+
+Modo Interactivo
+Ejecuta el programa y sigue las instrucciones en consola para ingresar los procesos manualmente: Bash
 
 java Main
-🧪 Ejemplo de uso
-1. Agregar tarea
-2. Ver tareas
-3. Editar tarea
-4. Eliminar tarea
-5. Salir
-📁 Estructura del proyecto
-Scheduler/
-│
-├── Main.java
-├── Task.java
-├── Scheduler.java
-└── utils/
 
-(ajústalo si tu estructura es diferente — esto es template limpio)
+Modo por Archivo
+Puedes cargar una lista de procesos desde un archivo .txt con el formato pid,nombre,llegada,rafaga,prioridad,tiempoIO:
+Bash
 
-📌 Futuras mejoras
-Persistencia en archivos o base de datos
-Interfaz gráfica (JavaFX o web)
-Recordatorios automáticos
-Prioridades en tareas
-Sistema de notificaciones
+java Main procesos.txt
+
