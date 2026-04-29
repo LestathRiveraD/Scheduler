@@ -27,7 +27,7 @@ public class ResultadoSimulacion {
         double sumaRetorno = 0;
 
         for (PCB p : procesosTerminados) {
-            // Aseguramos el cálculo del retorno: fin - llegada
+            // Asegurar el cálculo del retorno: fin - llegada
             int retorno = p.getTiempoFin() - p.getTiempoLlegada();
             p.setTiempoRetorno(retorno);
 
