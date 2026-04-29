@@ -26,11 +26,22 @@ public class PCB implements Comparable<PCB> {
     private int contadorAging;
     private Map<String, Integer> contextoCPU;
 
-    public PCB(int pid, String nombre, int tiempoLlegada, int tiempoRafaga) {
+    public PCB(int pid, String nombre, int tiempoLlegada, int tiempoRafaga, int prioridad) {
         this.pid = pid;
         this.nombre = nombre;
         this.tiempoLlegada = tiempoLlegada;
         this.tiempoRafaga = tiempoRafaga;
+        this.prioridad = prioridad; // Faltaba este parametro
+
+        // Otras inicializaciones que faltaban
+        this.estado = Estado.NUEVO;
+        this.tiempoRestante = tiempoRafaga;
+        this.tiempoInicio = -1;
+        
+        // Valores que deben de empezar con 0 si o si
+        this.tiempoEspera = 0;
+        this.contadorAging = 0;
+
         this.contextoCPU = new HashMap<>();
     }
 

@@ -31,7 +31,7 @@ public class Main
             {
                 String[] cur = lineas.get(i).split(",");
 
-                if (cur.length < 4) {
+                if (cur.length < 5) { // Se cambio a 5 parametros tras aniadir a la prioridad
                     System.out.println("Linea invalida");
                     continue;
                 }
@@ -40,7 +40,8 @@ public class Main
                         Integer.parseInt(cur[0].trim()),
                         cur[1].trim(),
                         Integer.parseInt(cur[2].trim()),
-                        Integer.parseInt(cur[3].trim())
+                        Integer.parseInt(cur[3].trim()),
+                        Integer.parseInt(cur[4].trim()) // Se aniado prioridad
                 );
 
                 procesos.add(p);
@@ -72,7 +73,12 @@ public class Main
                 int rafaga = sc.nextInt();
                 sc.nextLine();
 
-                PCB p = new PCB(pid, nombre, llegada, rafaga);
+                System.out.print("Prioridad (1=Alta, N=Baja"); // Se hace la nueva solicitud
+                int prioridad = sc.nextInt();
+                sc.nextLine();
+
+                // Actualice la creacion del objeto con el nuevo parametro
+                PCB p = new PCB(pid, nombre, llegada, rafaga, prioridad);
                 procesos.add(p);
             }
         }
@@ -121,12 +127,12 @@ public class Main
             case 3:
                 algoritmo = new CalendarizadorSRTF();
                 break;
-            case 4:
-                algoritmo = new CalendarizadorRR();
-                break;
-            case 5:
-                algoritmo = new CalendarizadorPrioridades();
-                break;
+            //case 4:
+                //algoritmo = new CalendarizadorRR();
+                //break;
+            //case 5:
+                //algoritmo = new CalendarizadorPrioridades();
+                //break;
             default:
                 System.out.println("Opción inválida");
                 return;

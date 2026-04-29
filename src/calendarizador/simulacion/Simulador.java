@@ -13,6 +13,20 @@ public class Simulador {
     private boolean paso_a_paso = false;
     private Scanner scanner = new Scanner(System.in);
 
+    // Nuevos atributos
+    private int totalContextSwitches = 0;
+    private int ticksOcupados = 0;
+
+    // Es el metodo para empaquetar los contadores internos
+    public ResultadoSimulacion generarResultado() {
+        return new ResultadoSimulacion(
+                new ArrayList<>(gestorColas.getTerminados()),
+                current_tick,
+                ticksOcupados,
+                totalContextSwitches
+        );
+    }
+
     public Simulador(Calendarizador calendarizador, GestorColas gestorColas, int paso_a_paso) {
         this.calendarizador = calendarizador;
         this.gestorColas = gestorColas;
@@ -68,6 +82,7 @@ public class Simulador {
 
         // 4. Selección
         if (procesoEnCPU == null && !listos.isEmpty()) {
+            totalContextSwitches++; // Aqui incrementa
             procesoEnCPU = calendarizador.seleccionarProceso(new ArrayList<>(listos), current_tick);
             listos.remove(procesoEnCPU);
             gestorColas.setProcesoActual(procesoEnCPU);
@@ -80,6 +95,7 @@ public class Simulador {
 
         // 5. Ejecutar CPU
         if (procesoEnCPU != null) {
+            ticksOcupados++; // Aqui incrementa
             procesoEnCPU.setTiempoRestante(procesoEnCPU.getTiempoRestante() - 1);
         }
 
