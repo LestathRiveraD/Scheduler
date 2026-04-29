@@ -118,6 +118,15 @@ public class Main
             case 2:
                 algoritmo = new CalendarizadorSJF();
                 break;
+            case 3:
+                algoritmo = new CalendarizadorSRTF();
+                break;
+            case 4:
+                algoritmo = new CalendarizadorRR();
+                break;
+            case 5:
+                algoritmo = new CalendarizadorPrioridades();
+                break;
             default:
                 System.out.println("Opción inválida");
                 return;
