@@ -57,10 +57,11 @@ public class GestorColas
 
     @Override
     public String toString() {
-    return      "  Estado      | PID\n" + 
+    return      "  Estado      | PID\n" +
                 "  Nuevos      | " + nuevos + "\n" +
                 "  Listos      | " + listos + "\n" +
                 "  Bloqueados  | " + bloqueados + "\n" +
-                "  Terminados  | " + terminados + "\n";
+                "  Terminados  | " + terminados + "\n" +
+                "  ProcesoActual | " + procesoActual + "\n";
     }
 } 

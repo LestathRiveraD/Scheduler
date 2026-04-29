@@ -113,8 +113,11 @@ public class Main
         System.out.println("\nSeleccione algoritmo:");
         System.out.println("1. FCFS");
         System.out.println("2. SJF");
+        System.out.println("3. SRTF");
+        System.out.println("4. RR");
+        System.out.println("5. PRIORIDADES CON AGING");
         int opcion = sc.nextInt();
-
+        int quantum;
         Calendarizador algoritmo;
 
         switch (opcion) {
@@ -127,12 +130,30 @@ public class Main
             case 3:
                 algoritmo = new CalendarizadorSRTF();
                 break;
-            //case 4:
-                //algoritmo = new CalendarizadorRR();
-                //break;
-            //case 5:
-                //algoritmo = new CalendarizadorPrioridades();
-                //break;
+            case 4:
+                algoritmo = new CalendarizadorRR();
+                System.out.println("Elige el tiempo de quantum (Min: 1)");
+                quantum = sc.nextInt();
+                if (quantum <= 0)
+                {
+                    System.out.println("Error: Quantum debe ser positivo");
+                    return;
+                }
+                if (algoritmo instanceof CalendarizadorRR rr) {
+                    rr.setQuantum(quantum);
+                }
+                else
+                {
+                    System.out.println("Error fatal.");
+                    return;
+                }
+                break;
+            case 5:
+                System.out.println("Ingrese quantum (min 1)");
+                quantum = sc.nextInt();
+                if (quantum < 1) {quantum = 1;}
+                algoritmo = new CalendarizadorPrioridades(quantum);
+                break;
             default:
                 System.out.println("Opción inválida");
                 return;
@@ -154,9 +175,7 @@ public class Main
         int paso = sc.nextInt();
         simulador.setIs_Paso_a_Paso(paso == 1);
 
-        while (gestor.getTerminados().size() < procesos.size()) {
-            simulador.tick();
-        }
+        simulador.ejecutar();
 
         // Mostrar Gantt
         System.out.println("\nSimulación terminada.");
